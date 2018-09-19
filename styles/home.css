@@ -130,7 +130,7 @@ input:focus {
 
 #sidebar-wrapper {
   margin-left: -250px;
-  margin-top: 350px;
+  margin-top: 20%;
   left: 250px;
   width: 250px;
   background: linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
