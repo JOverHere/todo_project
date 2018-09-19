@@ -89,9 +89,9 @@ input:focus {
 }
 
 #container {
-  width: 55%;
-  margin-left: 22%;
-  margin-top: 5%;
+  width: 500px;
+  margin-left: 450px;
+  margin-top: 80px;
   background: white;
   box-shadow: 1px 1px 1px 1px grey;
 }
@@ -109,7 +109,7 @@ input:focus {
 /*NAV HEADER TEXT*/
 
 .navbar-brand {
-  font-size: 270%;
+  font-size: 40px;
   font-family: 'Permanent Marker', cursive;
   position: sticky;
 
@@ -123,13 +123,15 @@ input:focus {
 
 /*SIDE BAR CSS BELOW:*/
 
-
-
+#wrapper {
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
+}
 
 #sidebar-wrapper {
- position: absolute;
-  left: 0;
-  top: 94px;
+  margin-left: -250px;
+  margin-top: 20%;
+  left: 250px;
   width: 250px;
   background: linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
   linear-gradient(225deg, black 25%, transparent 25%) -50px 0,
@@ -137,11 +139,33 @@ input:focus {
   linear-gradient(45deg, black 25%, transparent 25%);
   background-size: 2em 2em;
   background-color: #232323;
-  height: calc(100vh - 92px);
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
   z-index: 1000;
+  transition: all 0.4s ease 0s;
   font-family: 'Permanent Marker', cursive;
+
 }
 
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+.sidebar-nav li {
+  line-height: 40px;
+  text-indent: 20px;
+}
 
 .sidebar-nav li a {
   color: #999999;
@@ -150,7 +174,7 @@ input:focus {
 }
 
 .sidebar-nav li a:hover {
-  color: black;
+  color: #fff;
   background: rgba(255, 255, 255, 0.2);
   text-decoration: none;
 }
@@ -160,19 +184,81 @@ input:focus {
   text-decoration: none;
 }
 
+.sidebar-nav>.sidebar-brand {
+  height: 65px;
+  line-height: 60px;
+  font-size: 18px;
+}
 
+.sidebar-nav>.sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+.content-header {
+  height: 65px;
+  line-height: 65px;
+}
+
+.content-header h1 {
+  margin: 0;
+  margin-left: 20px;
+  line-height: 65px;
+  display: inline-block;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.inset {
+  padding: 20px;
+}
+
+@media (max-width:767px) {
+
+  #wrapper {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    left: 0;
+  }
+
+  #wrapper.active {
+    position: relative;
+    left: 250px;
+  }
+
+  #wrapper.active #sidebar-wrapper {
+    left: 250px;
+    width: 250px;
+    transition: all 0.4s ease 0s;
+  }
+
+  #menu-toggle {
+    display: inline-block;
+  }
+
+
+  .inset {
+    padding: 15px;
+  }
+}
 
 .center-body {
-  margin-top: 5%;
+  margin-top: 50px;
   text-align: center;
 }
 
 p {
-
-  font-size: 160%;
+  font-size: 25px;
   font-family: 'Permanent Marker', cursive;
-  margin: 0 5%;
-
+  margin-left: 250px;
 }
 
 .sidebar-brand {
@@ -184,10 +270,6 @@ p {
   font-size: 28px;
 }
 
-/*#input-form {
+#input-form {
   border-radius: 25px;
-}*/
-
-#content-wrapper {
-  margin-left: 250px;
 }
