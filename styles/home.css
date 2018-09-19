@@ -1,7 +1,7 @@
 body {
 
   background: white;
-  font-family: Roboto;
+  font-family: 'Permanent Marker', cursive;
 
   -webkit-animation-delay: 0.1s;
   -webkit-animation-name: fontfix;
@@ -27,14 +27,15 @@ ul {
 
 
 h1 {
-  background: #2980b9;
-  color: white;
+  font-color: white;
+  background: #96999e;
   margin: 0;
   padding: 10px 20px;
   text-transform: uppercase;
   font-size: 24px;
   font-weight: normal;
   text-align: center;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .fa-plus {
@@ -88,11 +89,11 @@ input:focus {
 }
 
 #container {
-  width: 360px;
-  margin-left: 570px;
-  margin-top: 100px;
-  background: #e3edf9;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin-left: 450px;
+  margin-top: 80px;
+  background: white;
+  box-shadow: 1px 1px 1px 1px grey;
 }
 
 .submit-button {
@@ -129,7 +130,7 @@ input:focus {
 
 #sidebar-wrapper {
   margin-left: -250px;
-  margin-top: 370px;
+  margin-top: 350px;
   left: 250px;
   width: 250px;
   background: linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
@@ -250,12 +251,12 @@ input:focus {
 }
 
 .center-body {
-  margin-top: 30px;
+  margin-top: 50px;
   text-align: center;
 }
 
 p {
-  font-size: 23px;
+  font-size: 25px;
   font-family: 'Permanent Marker', cursive;
   margin-left: 250px;
 }
@@ -267,4 +268,8 @@ p {
   color: #666;
   text-align: center;
   font-size: 28px;
+}
+
+#input-form {
+  border-radius: 25px;
 }
