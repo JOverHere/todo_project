@@ -39,9 +39,11 @@ module.exports = function makeDataHelpers() {
             if(err) {
                 return console.err(err);
             }
-            callback(err, rows);
+            callback(null, rows);
         })
 
-      };
+      }
 
     }
+
+}
