@@ -36,7 +36,7 @@
         </div>
       </div>
     </form>
-<!--     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <!--     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> -->
     <!-- Sidebar -->
@@ -61,10 +61,32 @@
     <div class="center-body">
       <p> Your Products To-Do List!</p>
     </div>
-        <div id="container" class="form-group">
-          <h1>Products <i class="fas fa-shopping-bag"></i></h1>
-
-        </div>
+    <div id="container" class="form-group">
+      <h1>Products <i class="fas fa-shopping-bag"></i></h1>
+    </div>
+    <div id="render-todo">
+      <% if(user){%>
+        <% for(items of templateVars){ %>
+          <li>
+            <%= "Title: " +  %>
+          </li>
+          <li>
+            <%= "Description: " +  %>
+          </li>
+          <li>
+            <%= "Date: " +   %>
+          </li>
+          <form method="POST" action="#">
+            <button>Completed</button>
+          </form>
+          </li>
+          <% }; %>
+            <% } else {%>
+              <p>Register here:</p>
+              <a href="/register">
+            </a>
+              <% } %>
+    </div>
     </div>
   </main>
 </body>
