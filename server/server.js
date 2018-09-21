@@ -43,11 +43,42 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+//renders the skeleton of the restaurant page.
+app.get("/category/restaurant", (req, res) => {
+  // knex('items').select().then(dbData) => {
+  //   console.log(dbData);
+  // }
+  res.render("restaurants");
+})
+
+//renders the skeleton of the restaurant page.
+app.get("/category/book", (req, res) => {
+  // knex('items').select().then(dbData) => {
+  //   console.log(dbData);
+  // }
+  res.render("books");
+})
+
+//renders the skeleton of the restaurant page.
+app.get("/category/movie", (req, res) => {
+  // knex('items').select().then(dbData) => {
+  //   console.log(dbData);
+  // }
+  res.render("movies");
+})
+
+//renders the skeleton of the restaurant page.
+app.get("/category/product", (req, res) => {
+  // knex('items').select().then(dbData) => {
+  //   console.log(dbData);
+  // }
+  res.render("products");
+})
+
 
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
 
-app.use("/", usersRoutes);
 
