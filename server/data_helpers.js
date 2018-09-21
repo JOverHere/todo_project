@@ -1,3 +1,17 @@
+
+
+const knexConfig  = require("../knexfile");
+
+console.log({knexConfig})
+
+const env = process.env.ENV || 'development';
+
+console.log({ env })
+
+const knex        = require("knex")(knexConfig[env]);
+
+
+
 const textAnalyzer = require('./test_parallel_dots');
 
 module.exports = function makeDataHelpers() {
@@ -8,7 +22,7 @@ module.exports = function makeDataHelpers() {
       // value being the value in the column.
       saveItem: (newItem) => {
 
-        knex('items')
+        db.knex('items')
           .insert({
               title: newItem.title,
               description: newItem.description,
@@ -20,7 +34,7 @@ module.exports = function makeDataHelpers() {
             }
           ).asCallback((err, row) => {
               if(err){
-                  return console.err(err);
+                  return console.log(err);
               }
               console.log('success');
           })
@@ -33,14 +47,18 @@ module.exports = function makeDataHelpers() {
 
       // gets all to-do Items in the database from a given category.
       getItems: (category, callback) => {
-        knex('items').where({category:category})
-        .select()
-        .asCallback((err, rows) => {
-            if(err) {
-                return console.err(err);
-            }
-            callback(null, rows);
-        })
+          db.knex.select('*').from('items')
+          .then(data => console.log({data}))
+          .catch(err => console.log({err}))
+        // knex('items').where({category:category})
+        // .select()
+        // .asCallback((err, rows) => {
+        //     if(err) {
+
+        //         callback(err)
+        //     }
+        //     callback(null, rows);
+        // })
 
       }
 
