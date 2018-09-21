@@ -29,7 +29,7 @@ module.exports = text => {
     })
     .then( ({taxonomy}) => {
       taxonomy.sort( (a,b) => (a.confidence_score - b.confidence_score));
-      resolve(taxonomy[0].tag);
+      resolve(taxonomy[0]);
     })
     .catch( err => {
       throw err
