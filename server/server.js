@@ -13,6 +13,7 @@ const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const naturalTextAnalyzer = require('./test_parallel_dots');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -39,12 +40,21 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
-// Home page
+
+// >>>>>>>>>>>>>>>>>>>>>HOMEPAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// renders the Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+//catches info from the create new items page and saves it into db.
+app.post("/save_item", (req, res) => {
 
+
+
+});
+
+// >>>>>>>>>>>>>>>>>>>>>RESTAURANT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //renders the skeleton of the restaurant page.
 app.get("/category/restaurant", (req, res) => {
   knex('items').where('category', 'restaurants').then(dbData => {
@@ -60,6 +70,7 @@ app.get("/category/restaurant", (req, res) => {
 });
 
 
+// >>>>>>>>>>>>>>>>>>>>>BOOK PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //renders the skeleton of the book page.
 app.get("/category/book", (req, res) => {
   knex('items').where('category', 'books').then(dbData => {
@@ -75,6 +86,7 @@ app.get("/category/book", (req, res) => {
 })
 
 
+// >>>>>>>>>>>>>>>>>>>>>MOVIE PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //renders the skeleton of the movie page.
 app.get("/category/movie", (req, res) => {
   knex('items').where('category', 'movies').then(dbData => {
@@ -92,6 +104,7 @@ app.get("/category/movie", (req, res) => {
 })
 
 
+// >>>>>>>>>>>>>>>>>>>>>PRODUCT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 //renders the skeleton of the product page.
 app.get("/category/product", (req, res) => {
   knex('items').where('category', 'products').then(dbData => {
@@ -110,10 +123,6 @@ app.get("/category/product", (req, res) => {
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
-
-  knex.select('*').from('users').then((data) =>{
-    console.log(data);      
-  });
 });
 
 
