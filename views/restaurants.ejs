@@ -68,7 +68,7 @@
       <h1>Restaurants <i class="fas fa-utensils"></i></h1>
     </div>
     <div id="render-todo">
-      <% if(user){%>
+
         <% for(item of items){ %>
           <li>
             <%= "Title: " + item.title %>
@@ -84,11 +84,7 @@
           </form>
           </li>
           <% }; %>
-            <% } else {%>
-              <p>Register here:</p>
-              <a href="/register">
-            </a>
-              <% } %>
+
     </div>
     </div>
   </main>
