@@ -69,7 +69,7 @@
     </div>
 
     <div id="render-todo">
-      <% if(user){%>
+
         <% for(item of items){ %>
           <li>
             <%= "Title: " + item.title %>
@@ -80,15 +80,12 @@
           <li>
             <%= "Date: " +  item.date_created %>
           </li>
-          <form method="POST" action="#">
+          <form method="POST" action="#" class="completed">
             <button>Completed</button>
           </form>
           </li>
           <% }; %>
-            <% } else {%>
-              <p>Register here:</p>
-              <a href="/register">
-            </a>
+
               <% } %>
     </div>
     </div>
