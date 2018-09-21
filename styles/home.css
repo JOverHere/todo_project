@@ -140,6 +140,7 @@ input:focus {
   height: calc(100vh - 92px);
   z-index: 1000;
   font-family: 'Permanent Marker', cursive;
+  border: #ededed solid 1px;
 }
 
 
@@ -190,4 +191,10 @@ p {
 
 #content-wrapper {
   margin-left: 250px;
+}
+
+.form-row {
+  position: absolute;
+  right: 20px;
+  top: 10px;
 }
