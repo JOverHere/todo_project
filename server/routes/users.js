@@ -15,9 +15,6 @@ module.exports = (knex) => {
     });
   });
 
-  router.get("/category/restaurant", (req, res) => {
-    res.redirect('/restaurant');
-  })
 
   return router;
 }
