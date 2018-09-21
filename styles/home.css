@@ -209,6 +209,10 @@ p {
 }
 }
 
+.sidebar-nav a:hover{
+  color: green;
+}
+
 #register-form {
   font-size: 28px;
   text-align: center;

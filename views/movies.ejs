@@ -66,17 +66,17 @@
     </div>
     <div id="render-todo">
       <% if(user){%>
-        <% for(items of templateVars){ %>
+        <% for(item of items){ %>
           <li>
-            <%= "Title: " +  %>
+            <%= "Title: " + item.title  %>
           </li>
           <li>
-            <%= "Description: " +  %>
+            <%= "Description: " + item.description %>
           </li>
           <li>
-            <%= "Date: " +   %>
+            <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="#">
+          <form method="POST" action="/category/movie">
             <button>Completed</button>
           </form>
           </li>

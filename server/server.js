@@ -86,7 +86,7 @@ app.get("/category/movie", (req, res) => {
 
     const templateVars = {
       items: movie_items
-    }
+    };
       res.render("movies", templateVars);
   });
 })
