@@ -110,6 +110,10 @@ app.get("/category/product", (req, res) => {
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
+
+  knex.select('*').from('users').then((data) =>{
+    console.log(data);      
+  });
 });
 
 
