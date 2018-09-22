@@ -36,13 +36,13 @@ $(document).ready(function(){
           <label>
             Login:
           </label>
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text" class="form-control" name="username" placeholder="Username">
         </div>
         <div class="col">
           <label>
             Password:
           </label>
-          <input type="text" class="form-control" placeholder="Password">
+          <input type="text" class="form-control" name="password" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-warning">LOG IN</button>
       </div>
@@ -90,7 +90,7 @@ $(document).ready(function(){
           <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="/category/movie" id=<%=item.id%>>
+          <form method="POST" action="/category/movie" name ="id" value=<%=item.id%> id=<%=item.id%>>
             <div class="btn btn-success">Completed</div>
 <div class="btn-group">
   <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
