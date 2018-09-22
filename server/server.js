@@ -13,7 +13,7 @@ const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-const cookieSession = require('cookie-session');
+// const cookieSession = require('cookie-session');
 // const bcrypt = require('bcryptjs');
  
 
@@ -32,10 +32,10 @@ app.use(morgan('dev'));
 
 // log cookie session to users after they sign in
 
-app.use(cookieSession({
-  user_id: 'session',
-  keys: ['key1'],
-}));
+// app.use(cookieSession({
+//   user_id: 'session',
+//   keys: ['key1'],
+// }));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
@@ -100,7 +100,7 @@ app.get("/category/restaurant", (req, res) => {
     }
     const templateVars = {
       items: restaurant_items,
-      user: users[req.session.user_id]
+      // user: users[req.session.user_id]
     }
     console.log(users[req.session.user_id])
     res.render("restaurants", templateVars);
@@ -135,7 +135,7 @@ app.get("/category/book", (req, res) => {
     }
     const templateVars = {
       items: book_items,
-      user: users[req.session.user_id]
+      // user: users[req.session.user_id]
     }
       res.render("books", templateVars);
   });
@@ -170,7 +170,7 @@ app.get("/category/movie", (req, res) => {
 
     const templateVars = {
       items: movie_items,
-      user: users[req.session.user_id]
+      // user: users[req.session.user_id]
   
     };
       res.render("movies", templateVars);
