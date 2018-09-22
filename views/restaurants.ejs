@@ -80,7 +80,7 @@
           <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="/category/movie">
+          <form method="POST" action="/category/movie" id=<%=item.id%>>
              <button class="btn btn-success">Completed</button>
              <div class="btn-group">
   <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

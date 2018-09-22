@@ -118,12 +118,15 @@ app.get("/category/book", (req, res) => {
 
 app.post("/category/book/completed", (req, res) => {
 
-  console.log(req.body);
-  // knex('items').where({
-  //   category: 'restaurant'
-  //   title: ''
-
-  // });
+  //console.log(req.body);
+  knex('items').where({
+    id: req.body.id
+  }).then(item => {
+    console.log(item)
+    item.complete=true;
+    console.log(item)
+    res.redirect("books")
+  });
 });
 
 

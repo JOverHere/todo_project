@@ -37,6 +37,7 @@
           </label>
           <input type="text" class="form-control" placeholder="Password">
         </div>
+        <button type="submit" class="btn btn-warning">LOG IN</button>
       </div>
     </div>
     </form>
@@ -83,8 +84,8 @@
           <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="/category/movie">
-             <button class="btn btn-success">Completed</button>
+          <form method="POST" action="/category/book/completed" >
+             <button class="btn btn-success"  name ="id" value=<%=item.id%> id=<%=item.id%>>Completed</button>
              <div class="btn-group">
   <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     More..
