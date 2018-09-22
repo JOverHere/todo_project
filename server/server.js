@@ -17,6 +17,7 @@ const cookieSession = require('cookie-session')
  
 
 
+const naturalTextAnalyzer = require('./test_parallel_dots');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -50,13 +51,40 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
-// Home page
+
+// >>>>>>>>>>>>>>>>>>>>>HOMEPAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// renders the Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+//catches info from the create new items page and saves it into db.
+app.post("/save_item", (req, res) => {
 
-// renders the skeleton of the restaurant page.
+  let analyzeResult = "";
+  let date = new Date(req.body.date);
+  naturalTextAnalyzer(req.body.title).then(answer => {
+    analyzeResult += answer;
+
+    knex('items').insert({
+      title: req.body.title,
+      description: req.body.description,
+      complete: false,
+      date_created: date,
+      category: analyzeResult,
+      user_id: 5
+    }).then(result => {
+      console.log("INSERTION WAS COMPLETE" + analyzeResult);
+    });
+
+    res.redirect("/");
+  })
+
+
+});
+
+// >>>>>>>>>>>>>>>>>>>>>RESTAURANT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//renders the skeleton of the restaurant page.
 app.get("/category/restaurant", (req, res) => {
   knex('items').where('category', 'restaurants').then(dbData => {
     const restaurant_items = [];
@@ -72,7 +100,8 @@ app.get("/category/restaurant", (req, res) => {
 });
 
 
-// renders the skeleton of the book page.
+// >>>>>>>>>>>>>>>>>>>>>BOOK PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//renders the skeleton of the book page.
 app.get("/category/book", (req, res) => {
   knex('items').where('category', 'books').then(dbData => {
     const book_items = [];
@@ -88,7 +117,8 @@ app.get("/category/book", (req, res) => {
 })
 
 
-// renders the skeleton of the movie page.
+// >>>>>>>>>>>>>>>>>>>>>MOVIE PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//renders the skeleton of the movie page.
 app.get("/category/movie", (req, res) => {
   knex('items').where('category', 'movies').then(dbData => {
     const movie_items = [];
@@ -107,7 +137,8 @@ app.get("/category/movie", (req, res) => {
 })
 
 
-// renders the skeleton of the product page.
+// >>>>>>>>>>>>>>>>>>>>>PRODUCT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//renders the skeleton of the product page.
 app.get("/category/product", (req, res) => {
   knex('items').where('category', 'products').then(dbData => {
       const product_items = [];
@@ -123,13 +154,17 @@ app.get("/category/product", (req, res) => {
 })
 
 
+// >>>>>>>>>>>>>>>>>>>>>>REGISTER PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// renders the register page.
+app.get("/register", (req, res) => {
+
+  res.render("register");
+});
+
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
-
-  knex.select('*').from('users').then((data) =>{
-    console.log(data);      
-  });
 });
 
 

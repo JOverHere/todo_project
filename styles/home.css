@@ -127,7 +127,7 @@ input:focus {
 
 
 #sidebar-wrapper {
- position: absolute;
+ position: fixed;
   left: 0;
   top: 94px;
   width: 250px;
@@ -232,4 +232,8 @@ max-width: 50%;
   font-size: 26px;
 }
 
+.completed {
+  text-align: center;
+  width: 30%;
+}
 
