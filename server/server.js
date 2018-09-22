@@ -73,6 +73,7 @@ app.post("/save_item", (req, res) => {
 });
 
 // >>>>>>>>>>>>>>>>>>>>>RESTAURANT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 //renders the skeleton of the restaurant page.
 app.get("/category/restaurant", (req, res) => {
   knex('items').where('category', 'restaurants').then(dbData => {
@@ -87,8 +88,19 @@ app.get("/category/restaurant", (req, res) => {
   });
 });
 
+app.post("/category/restaurant/complete", (req, res) => {
+
+  console.log(req.body);
+  // knex('items').where({
+  //   category: 'restaurant'
+  //   title: ''
+
+  // });
+});
+
 
 // >>>>>>>>>>>>>>>>>>>>>BOOK PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 //renders the skeleton of the book page.
 app.get("/category/book", (req, res) => {
   knex('items').where('category', 'books').then(dbData => {
@@ -101,7 +113,18 @@ app.get("/category/book", (req, res) => {
     }
       res.render("books", templateVars);
   });
-})
+});
+
+
+app.post("/category/book/completed", (req, res) => {
+
+  console.log(req.body);
+  // knex('items').where({
+  //   category: 'restaurant'
+  //   title: ''
+
+  // });
+});
 
 
 // >>>>>>>>>>>>>>>>>>>>>MOVIE PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -145,6 +168,22 @@ app.get("/register", (req, res) => {
   res.render("register");
 });
 
+
+app.post("/register", (req, res) => {
+
+  // console.log(req.body.username);
+  knex('users').insert({
+    username:req.body.username,
+    password:req.body.password
+  }).then(result => {
+    console.log("INSERTION WAS COMPLETE");
+    res.redirect("/");
+  });
+
+
+
+
+});
 
 
 app.listen(PORT, () => {
