@@ -30,6 +30,7 @@ app.use(morgan('dev'));
 
 
 // log cookie session to users after they sign in
+
 app.use(cookieSession({
   user_id: 'session',
   keys: ['key1'],
@@ -95,6 +96,7 @@ app.get("/category/restaurant", (req, res) => {
       items: restaurant_items,
       user: users[req.session.user_id]
     }
+    console.log(users[req.session.user_id])
     res.render("restaurants", templateVars);
   });
 });
