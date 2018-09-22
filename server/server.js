@@ -13,7 +13,7 @@ const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-// const cookieSession = require('cookie-session');
+const cookieSession = require('cookie-session');
 // const bcrypt = require('bcryptjs');
  
 
@@ -32,10 +32,10 @@ app.use(morgan('dev'));
 
 // log cookie session to users after they sign in
 
-// app.use(cookieSession({
-//   user_id: 'session',
-//   keys: ['key1'],
-// }));
+app.use(cookieSession({
+  user_id: 'session',
+  keys: ['key1'],
+}));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
@@ -100,9 +100,9 @@ app.get("/category/restaurant", (req, res) => {
     }
     const templateVars = {
       items: restaurant_items,
-      // user: users[req.session.user_id]
+      // users: user.username
     }
-    console.log(users[req.session.user_id])
+    // console.log(user.username)
     res.render("restaurants", templateVars);
   });
 });
@@ -135,7 +135,7 @@ app.get("/category/book", (req, res) => {
     }
     const templateVars = {
       items: book_items,
-      // user: users[req.session.user_id]
+      // users: user.username
     }
       res.render("books", templateVars);
   });
@@ -170,7 +170,7 @@ app.get("/category/movie", (req, res) => {
 
     const templateVars = {
       items: movie_items,
-      // user: users[req.session.user_id]
+      // users: user.username
   
     };
       res.render("movies", templateVars);
@@ -195,6 +195,7 @@ app.post("/category/movie/completed", (req, res) => {
 // renders the product page with all of the items with category product
 // as well as complete = false.
 app.get("/category/product", (req, res) => {
+
   knex('items').where({
     category: 'products',
     complete: false
@@ -207,7 +208,7 @@ app.get("/category/product", (req, res) => {
       const templateVars = {
         items: product_items,
 
-        user: users[req.session.user_id]
+        // user: user.username
       }
         res.render("products", templateVars);
     });
@@ -230,7 +231,22 @@ app.post("/category/product/completed", (req, res) => {
 // >>>>>>>>>>>>>>>>>>>>>>LOGIN PAGE POST FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 app.post('/login', (req, res) => {
-  console.log(req.body);
+  console.log(req.body.username);
+  knex('users').where({
+    username: req.body.username,
+    password: req.body.password
+  }).then(user => {
+    if(user === []) {
+      return res.status(403).send('Email or password is invalid.');
+    }
+    else {
+      req.session.user_id = user.id;
+      console.log("DEBUGGG");
+    }
+    //console.log(req.session.user_id);
+    
+  })
+
   // knex('users').where('username').then(dbData => {
   // for (const user of dbData) {
   //   if (req.body.username === user.username && req.body.password === user.password) {
@@ -238,8 +254,9 @@ app.post('/login', (req, res) => {
   //     console.log(user);
   //     res.redirect('/urls');
   //   }
+  //   console.log(req.session.user_id);
   // }
-  // return res.status(403).send('Email or password is invalid.');
+  
 });
 
 
