@@ -10,9 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="../scripts/jquery.js"></script>
   <script type="text/javascript" src="../scripts/app.js"></script>
-  <script type="text/javascript" src="/styles/navscroll.js"></script>
   <link rel="stylesheet" type="text/css" href="../styles/home.css">
-  <link rel="stylesheet" type="text/css" href="../styles/categories.css">
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -85,7 +83,7 @@
             <%= "Date: " + item.date_created  %>
           </li>
           <form method="POST" action="/category/book/completed" >
-             <button class="btn btn-success"  name ="id" value=<%=item.id%> id=<%=item.id%>>Completed</button>
+             <button class="btn btn-success"  name ="id" value= "<%=item.id %>" id="<%=item.id%>">Completed</button>
              <div class="btn-group">
   <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     More..

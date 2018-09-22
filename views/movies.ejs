@@ -14,16 +14,6 @@
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
- <!--  <script>
-$(document).ready(function(){
-    $(".completed").click(function(){
-        $("#render-todo").fadeOut()
-    });
-    $(".btn2").click(function(){
-        $("p").fadeIn();
-    });
-});
-</script> -->
 </head>
 
 <body>
@@ -47,26 +37,24 @@ $(document).ready(function(){
         <button type="submit" class="btn btn-warning">LOG IN</button>
       </div>
     </form>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
+
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">Categories
-                </li>
-                <li class="sidebar-link"><a href="/category/movie">Movies</a>
-                </li>
-                <li class="sidebar-link"><a href="/category/restaurant">Restaurants</a>
-                </li>
-                <li class="sidebar-link"><a href="/category/book">Books</a>
-                </li>
-                <li class="sidebar-link"><a href="/category/product">Products</a>
-                </li>
-                <li id="sidebar-register"><a href="/register">Register Here</a>
-                </li>
-            </ul>
-        </div>
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand">Categories
+        </li>
+        <li class="sidebar-link"><a href="/category/movie">Movies</a>
+        </li>
+        <li class="sidebar-link"><a href="/category/restaurant">Restaurants</a>
+        </li>
+        <li class="sidebar-link"><a href="/category/book">Books</a>
+        </li>
+        <li class="sidebar-link"><a href="/category/product">Products</a>
+        </li>
+        <li id="sidebar-register"><a href="/register">Register Here</a>
+        </li>
+      </ul>
+    </div>
     </div>
   </nav>
   <!-- main body -->
@@ -78,34 +66,34 @@ $(document).ready(function(){
       <h1 class="h1">Movies <i class="fas fa-video"></i></h1>
     </div>
     <div id="render-todo">
-
-        <% for(item of items){ %>
+      <% for(item of items){ %>
         <div id="item-border">
           <li class="li" id="top-border-radius">
             <%= "Title: " + item.title  %>
           </li>
-          <li >
+          <li>
             <%= "Description: " + item.description %>
           </li>
           <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="/category/movie/completed" name ="id" value=<%=item.id%> id=<%=item.id%>>
-            <div class="btn btn-success">Completed</div>
-<div class="btn-group">
-  <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    More..
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Move</a>
-  </div>
-</div>
+          <form method="POST" action="/category/movie/completed" >
+              <button class="btn btn-success" name="id" value="<%=item.id%>" id="<%=item.id%>">
+                Completed
+              </button>
+              <div class="btn-group">
+                <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  More..
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Move</a>
+                </div>
+              </div>
           </form>
           </li>
         </div>
-         <br />
-          <% }; %>
-
+        <br />
+        <% }; %>
     </div>
   </main>
 </body>
