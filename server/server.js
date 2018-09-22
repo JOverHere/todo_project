@@ -73,9 +73,10 @@ app.post("/save_item", (req, res) => {
       complete: false,
       date_created: req.body.date,
       category: analyzeResult,
-      user_id: 5
+      user_id: 22
     }).then(result => {
-      console.log("INSERTION WAS COMPLETE" + analyzeResult);
+      window.alert("ITEM CREATED IN CATEGORY" + analyzeResult);
+      // console.log("INSERTION WAS COMPLETE" + analyzeResult);
     });
 
     res.redirect("/");
@@ -86,9 +87,13 @@ app.post("/save_item", (req, res) => {
 
 // >>>>>>>>>>>>>>>>>>>>>RESTAURANT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-//renders the skeleton of the restaurant page.
+// renders the restaurant page with all of the items with category restaurant
+// as well as complete = false.
 app.get("/category/restaurant", (req, res) => {
-  knex('items').where('category', 'restaurants').then(dbData => {
+  knex('items').where({
+    category: 'restaurants',
+    complete: false
+  }).then(dbData => {
     const restaurant_items = [];
     for(item of dbData) {
       restaurant_items.push(item);
@@ -102,22 +107,28 @@ app.get("/category/restaurant", (req, res) => {
   });
 });
 
-app.post("/category/restaurant/complete", (req, res) => {
+//post action to set completed = true.
+app.post("/category/restaurant/completed", (req, res) => {
 
-  console.log(req.body);
-  // knex('items').where({
-  //   category: 'restaurant'
-  //   title: ''
-
-  // });
+  //console.log(req.body);
+  knex('items').where({
+    id: req.body.id
+  }).update({complete:true}).then(item => {
+    console.log(item)
+    res.redirect("/category/restaurant")
+  });
 });
 
 
 // >>>>>>>>>>>>>>>>>>>>>BOOK PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-//renders the skeleton of the book page.
+// renders the book page with all of the items with category book
+// as well as complete = false.
 app.get("/category/book", (req, res) => {
-  knex('items').where('category', 'books').then(dbData => {
+  knex('items').where({
+    category: 'books',
+    complete: false
+  }).then(dbData => {
     const book_items = [];
     for(let item of dbData) {
       book_items.push(item);
@@ -130,27 +141,27 @@ app.get("/category/book", (req, res) => {
   });
 });
 
-
+//post action to set completed = true.
 app.post("/category/book/completed", (req, res) => {
 
   //console.log(req.body);
   knex('items').where({
     id: req.body.id
-  }).then(item => {
+  }).update({complete:true}).then(item => {
     console.log(item)
-    item.complete=true;
-    console.log(item)
-    res.redirect("books")
+    res.redirect("/category/book")
   });
 });
 
 
 // >>>>>>>>>>>>>>>>>>>>>MOVIE PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-// renders the skeleton of the movie page.
-
+// renders the movie page with all of the items with category movie
+// as well as complete = false.
 app.get("/category/movie", (req, res) => {
-  knex('items').where('category', 'movies').then(dbData => {
+  knex('items').where({
+    category: 'movies',
+    complete: false
+  }).then(dbData => {
     const movie_items = [];
     for(let item of dbData) {
       movie_items.push(item);
@@ -166,12 +177,27 @@ app.get("/category/movie", (req, res) => {
   });
 })
 
+//post action to set completed = true.
+app.post("/category/movie/completed", (req, res) => {
+
+  //console.log(req.body);
+  knex('items').where({
+    id: req.body.id
+  }).update({complete:true}).then(item => {
+    console.log(item)
+    res.redirect("/category/movie")
+  });
+});
+
 
 // >>>>>>>>>>>>>>>>>>>>>PRODUCT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-//renders the skeleton of the product page.
+// renders the product page with all of the items with category product
+// as well as complete = false.
 app.get("/category/product", (req, res) => {
-  knex('items').where('category', 'products').then(dbData => {
+  knex('items').where({
+    category: 'products',
+    complete: false
+  }).then(dbData => {
       const product_items = [];
       for(let item of dbData) {
         product_items.push(item);
@@ -185,6 +211,18 @@ app.get("/category/product", (req, res) => {
         res.render("products", templateVars);
     });
 })
+
+//post action to set completed = true.
+app.post("/category/product/completed", (req, res) => {
+
+  //console.log(req.body);
+  knex('items').where({
+    id: req.body.id
+  }).update({complete:true}).then(item => {
+    console.log(item)
+    res.redirect("/category/product")
+  });
+});
 
 
 
@@ -213,6 +251,7 @@ app.get("/register", (req, res) => {
 });
 
 
+//creates user and inserts into database.
 app.post("/register", (req, res) => {
 
   // console.log(req.body.username);
