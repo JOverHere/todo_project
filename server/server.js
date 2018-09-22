@@ -146,7 +146,9 @@ app.post("/category/book/completed", (req, res) => {
 
 
 // >>>>>>>>>>>>>>>>>>>>>MOVIE PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-//renders the skeleton of the movie page.
+
+// renders the skeleton of the movie page.
+
 app.get("/category/movie", (req, res) => {
   knex('items').where('category', 'movies').then(dbData => {
     const movie_items = [];
