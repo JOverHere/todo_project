@@ -14,11 +14,21 @@
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+ <!--  <script>
+$(document).ready(function(){
+    $(".completed").click(function(){
+        $("#render-todo").fadeOut()
+    });
+    $(".btn2").click(function(){
+        $("p").fadeIn();
+    });
+});
+</script> -->
 </head>
 
 <body>
   <!-- navbar -->
-  <nav id="navbar-box" class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav id="navbar-box" class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i>  Git 'Er Done</a>
     <form>
       <div class="form-row">
@@ -64,7 +74,7 @@
       <p> Your Movie To-Do List!</p>
     </div>
     <div id="container" class="form-group">
-      <h1>Movies <i class="fas fa-video"></i></h1>
+      <h1 class="h1">Movies <i class="fas fa-video"></i></h1>
     </div>
     <div id="render-todo">
 
@@ -76,11 +86,19 @@
           <li>
             <%= "Description: " + item.description %>
           </li>
-          <li>
+          <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="/category/movie">
-            <button>Completed</button>
+          <form method="POST" action="/category/movie" id="completed-btn">
+            <div class="btn btn-success">Completed</div>
+<div class="btn-group">
+  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    More..
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Move</a>
+  </div>
+</div>
           </form>
           </li>
         </div>

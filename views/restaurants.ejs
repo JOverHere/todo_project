@@ -19,7 +19,7 @@
 
 <body>
   <!-- navbar -->
-  <nav id="navbar-box" class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav id="navbar-box" class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i>  Git 'Er Done</a>
     <form>
       <div class="form-row">
@@ -65,23 +65,31 @@
       <p> Your Restaurants To-Do List!</p>
     </div>
     <div id="container" class="form-group">
-      <h1>Restaurants <i class="fas fa-utensils"></i></h1>
+      <h1 class="h1">Restaurants <i class="fas fa-utensils"></i></h1>
     </div>
     <div id="render-todo">
 
         <% for(item of items){ %>
         <div id="item-border">
-          <li>
+          <li id="top-border-radius">
             <%= "Title: " + item.title  %>
           </li>
           <li>
             <%= "Description: " + item.description %>
           </li>
-          <li>
+          <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
           <form method="POST" action="/category/movie">
-            <button>Completed</button>
+             <button class="btn btn-success">Completed</button>
+             <div class="btn-group">
+  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    More..
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Move</a>
+  </div>
+</div>
           </form>
           </li>
         </div>
