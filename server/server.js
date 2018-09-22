@@ -13,13 +13,14 @@ const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-const cookieSession = require('cookie-session')
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
  
 
 
 const naturalTextAnalyzer = require('./test_parallel_dots');
 
-// Seperated Routes for each Resource
+// Separated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -147,13 +148,32 @@ app.get("/category/product", (req, res) => {
       for(let item of dbData) {
         product_items.push(item);
       }
+      console.log('product items is: ', product_items);
       const templateVars = {
         items: product_items,
+
         user: users[req.session.user_id]
       }
         res.render("movies", templateVars);
     });
 })
+
+
+
+// Login for users
+app.post('/login', (req, res) => {
+  knex.select('*').from('users').then(dbData => {
+  for (const user in dbData) {
+    if (req.body.email === users[user].email &&
+      bcrypt.compareSync(req.body.password, users[user].password)) {
+      req.session.user_id = user;
+      res.redirect('/urls');
+    }
+  }
+  return res.status(403).send('Email or password is invalid.');
+});
+
+
 
 
 // >>>>>>>>>>>>>>>>>>>>>>REGISTER PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

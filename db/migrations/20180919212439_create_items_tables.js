@@ -4,7 +4,7 @@ exports.up = function (knex, Promise) {
     table.string('title', [45]).notNullable(),
     table.string('description', [45]).notNullable(),
     table.boolean('complete').notNullable().defaultTo(false),
-    table.date('date_created').notNullable(),
+    table.string('date_created').notNullable(),
     table.enu('category', ['movies', 'restaurants', 'books', 'products']).notNullable(),
     table.integer('user_id').references('id').inTable('users').notNullable()
   });
