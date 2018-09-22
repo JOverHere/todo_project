@@ -70,20 +70,23 @@
 
     <div id="render-todo">
 
-        <% for(item of items){ %>
+       <% for(item of items){ %>
+        <div id="item-border">
           <li>
-            <%= "Title: " + item.title %>
+            <%= "Title: " + item.title  %>
           </li>
           <li>
             <%= "Description: " + item.description %>
           </li>
           <li>
-            <%= "Date: " +  item.date_created %>
+            <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="#">
+          <form method="POST" action="/category/movie">
             <button>Completed</button>
           </form>
           </li>
+        </div>
+         <br />
           <% }; %>
 
     </div>

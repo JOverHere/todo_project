@@ -69,6 +69,7 @@
     <div id="render-todo">
 
         <% for(item of items){ %>
+        <div id="item-border">
           <li>
             <%= "Title: " + item.title  %>
           </li>
@@ -82,6 +83,8 @@
             <button>Completed</button>
           </form>
           </li>
+        </div>
+         <br />
           <% }; %>
 
     </div>

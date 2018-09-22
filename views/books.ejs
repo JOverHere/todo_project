@@ -68,35 +68,24 @@
       <h1>Books <i class="fas fa-book"></i></h1>
     </div>
     <div id="render-todo">
-
-        <% for(item of items){ %>
+<% for(item of items){ %>
+        <div id="item-border">
           <li>
-            <%= "Title: " + item.title %>
+            <%= "Title: " + item.title  %>
           </li>
           <li>
             <%= "Description: " + item.description %>
           </li>
           <li>
-            <%= "Date: " +  item.date_created %>
+            <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="#">
-            <submit>Completed</submit>
-          </form>
-          <form method="POST" action="#">
-            <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="submit">
-    Dropdown
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
+          <form method="POST" action="/category/movie">
+            <button>Completed</button>
           </form>
           </li>
+        </div>
+         <br />
           <% }; %>
-
     </div>
     </div>
   </main>
