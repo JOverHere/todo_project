@@ -13,6 +13,7 @@
 
     <script type="text/javascript" src="/scripts/app.js"></script>
     <link rel="stylesheet" type="text/css" href="/styles/home.css">
+    <script type="text/javascript" src="/styles/navscroll.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
@@ -22,7 +23,8 @@
 
   <body>
     <!-- navbar -->
-    <nav id="navbar-box" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-custom">
+    <nav id="navbar-box" class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
       <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i>  Git 'Er Done</a>
       <form>
   <div class="form-row">
@@ -40,6 +42,8 @@
     </div>
   </div>
 </form>
+</nav>
+</div>
       <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
@@ -58,7 +62,7 @@
             </ul>
         </div>
       </div>
-    </nav>
+
     <!-- main body -->
     <main id="content-wrapper">
       <div class="center-body">
@@ -66,16 +70,18 @@
       </div>
       <form id="input-form" action="/save_item" method="POST">
         <div id="container" class="form-group">
-          <h1>Add your to-do here</h1>
-          <input type="text" id="title" name="title" placeholder="Add Title">
-          <input type="text" id="date" name="date" placeholder="Add Date">
-          <input type="text" id="description" name="description" placeholder="Add Description">
+          <h1 class="h1 header-h1">Add your to-do here</h1>
+          <input type="text" name="title" placeholder="Add Title">
+          <input type="text" name="date" placeholder="Add Date">
+          <input type="text" name="description" placeholder="Add Description">
           <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit</button>
         </div>
       </form>
     </main>
   </body>
 </html>
+
+
 
 
 
