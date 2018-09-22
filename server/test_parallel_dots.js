@@ -31,11 +31,17 @@ module.exports = text => {
       return resp.json()
     })
     .then( ({taxonomy}) => {
-      taxonomy.sort( (a,b) => (a.confidence_score - b.confidence_score));
-      resolve(taxonomy);//.tag);
+      taxonomy.sort( (a,b) => {
+         (b.confidence_score - a.confidence_score);
+      });
+      // console.log("this is here", taxonomy);
+      resolve(taxonomy[0].tag);//.tag);
     })
     .catch( err => {
       throw err
     })
   })
 }
+
+
+

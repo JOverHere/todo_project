@@ -1,8 +1,8 @@
 const naturalTextAnalyzer = require('./test_parallel_dots');
 
-const string = "soccer";
+const string = "buy pants";
 
 naturalTextAnalyzer(string)
   .then( answer => {
-    console.log(answer);
+    //console.log(answer);
   })
