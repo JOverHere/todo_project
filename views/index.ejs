@@ -68,13 +68,14 @@
       <div class="center-body">
       <p> Welcome to your automated to-do list generator!</p>
       </div>
-      <form id="input-form">
+      <form id="input-form" action="/save_item" method="POST">
         <div id="container" class="form-group">
-          <h1 class="h1 header-h1">Add your to-do here</h1>
-          <input type="text" placeholder="Add Title">
-          <input type="text" placeholder="Add Date">
-          <input type="text" placeholder="Add Description">
-          <button type="button" class="btn btn-secondary btn-lg btn-block">Submit</button>
+          <h1>Add your to-do here</h1>
+          <input type="text" id="title" name="title" placeholder="Add Title">
+          <input type="text" id="date" name="date" placeholder="Add Date">
+          <input type="text" id="description" name="description" placeholder="Add Description">
+          <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit</button>
+
         </div>
       </form>
     </main>
