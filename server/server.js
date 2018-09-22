@@ -13,6 +13,10 @@ const knexConfig  = require("../knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const cookieSession = require('cookie-session')
+ 
+
+
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -22,6 +26,13 @@ const usersRoutes = require("./routes/users");
 // The :status token will be colored red for server error codes, yellow for client error codes,
 // cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
+
+
+// log cookie session to users after they sign in
+app.use(cookieSession({
+  user_id: 'session',
+  keys: ['key1'],
+}));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
@@ -45,7 +56,7 @@ app.get("/", (req, res) => {
 });
 
 
-//renders the skeleton of the restaurant page.
+// renders the skeleton of the restaurant page.
 app.get("/category/restaurant", (req, res) => {
   knex('items').where('category', 'restaurants').then(dbData => {
     const restaurant_items = [];
@@ -53,14 +64,15 @@ app.get("/category/restaurant", (req, res) => {
       restaurant_items.push(item);
     }
     const templateVars = {
-      items: restaurant_items
+      items: restaurant_items,
+      user: users[req.session.user_id]
     }
     res.render("restaurants", templateVars);
   });
 });
 
 
-//renders the skeleton of the book page.
+// renders the skeleton of the book page.
 app.get("/category/book", (req, res) => {
   knex('items').where('category', 'books').then(dbData => {
     const book_items = [];
@@ -68,14 +80,15 @@ app.get("/category/book", (req, res) => {
       book_items.push(item);
     }
     const templateVars = {
-      items: book_items
+      items: book_items,
+      user: users[req.session.user_id]
     }
       res.render("books", templateVars);
   });
 })
 
 
-//renders the skeleton of the movie page.
+// renders the skeleton of the movie page.
 app.get("/category/movie", (req, res) => {
   knex('items').where('category', 'movies').then(dbData => {
     const movie_items = [];
@@ -85,14 +98,16 @@ app.get("/category/movie", (req, res) => {
     console.log("movie items is: ", movie_items);
 
     const templateVars = {
-      items: movie_items
+      items: movie_items,
+      user: users[req.session.user_id]
+  
     };
       res.render("movies", templateVars);
   });
 })
 
 
-//renders the skeleton of the product page.
+// renders the skeleton of the product page.
 app.get("/category/product", (req, res) => {
   knex('items').where('category', 'products').then(dbData => {
       const product_items = [];
@@ -100,7 +115,8 @@ app.get("/category/product", (req, res) => {
         product_items.push(item);
       }
       const templateVars = {
-        items: product_items
+        items: product_items,
+        user: users[req.session.user_id]
       }
         res.render("movies", templateVars);
     });
