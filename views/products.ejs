@@ -82,8 +82,10 @@
           <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="/category/movie" name ="id" value=<%=item.id%> id=<%=item.id%>>
-             <button class="btn btn-success">Completed</button>
+          <form method="POST" action="/category/product/completed">
+            <button class="btn btn-success" name ="id" value="<%=item.id%>" id="<%=item.id%>">
+              Completed
+            </button>
 
 
           </form>
