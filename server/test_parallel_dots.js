@@ -2,7 +2,10 @@ const fetch = require('node-fetch')
 const FormData = require('form-data')
 
 const category = {
- finance: ["markets","economy","shares"]
+ movies: ["Harry Potter", "Inception", "Blade Runner", "Marvel", "Disney"],
+ restaurants: ["French cusine", "spaghetti", "burger", "Japanese cusines", "stores"],
+ books: ["nonfiction", "sci-fi", "novels", "short stories", "kindle", "bibliographies", "news", "fiction"],
+ products: ["shoes", "t-shirt", "furniture", "condiments", "jeans", "sofa", "electronics", "mall", "outlet"]
 }
 module.exports = text => {
   return new Promise( resolve => {
@@ -29,7 +32,7 @@ module.exports = text => {
     })
     .then( ({taxonomy}) => {
       taxonomy.sort( (a,b) => (a.confidence_score - b.confidence_score));
-      resolve(taxonomy[0]);
+      resolve(taxonomy[0].tag);
     })
     .catch( err => {
       throw err
