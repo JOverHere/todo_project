@@ -169,6 +169,22 @@ app.get("/register", (req, res) => {
 });
 
 
+app.post("/register", (req, res) => {
+
+  // console.log(req.body.username);
+  knex('users').insert({
+    username:req.body.username,
+    password:req.body.password
+  }).then(result => {
+    console.log("INSERTION WAS COMPLETE");
+    res.redirect("/");
+  });
+
+
+
+
+});
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
