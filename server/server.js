@@ -166,6 +166,7 @@ app.get("/category/movie", (req, res) => {
 
 
 // >>>>>>>>>>>>>>>>>>>>>PRODUCT PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 //renders the skeleton of the product page.
 app.get("/category/product", (req, res) => {
   knex('items').where('category', 'products').then(dbData => {
@@ -185,18 +186,20 @@ app.get("/category/product", (req, res) => {
 
 
 
-// // Login for users
+// >>>>>>>>>>>>>>>>>>>>>>LOGIN PAGE POST FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 app.post('/login', (req, res) => {
-  knex.select('*').from('users').then(dbData => {
-  for (const user of dbData) {
-    if (req.body.username === user.username && req.body.password === user.password) {
-      req.session.user_id = user;
-      console.log(user);
-      res.redirect('/urls');
-    }
-  }
-  return res.status(403).send('Email or password is invalid.');
-});})
+  console.log(req.body);
+  // knex('users').where('username').then(dbData => {
+  // for (const user of dbData) {
+  //   if (req.body.username === user.username && req.body.password === user.password) {
+  //     req.session.user_id = user;
+  //     console.log(user);
+  //     res.redirect('/urls');
+  //   }
+  // }
+  // return res.status(403).send('Email or password is invalid.');
+});
 
 
 
