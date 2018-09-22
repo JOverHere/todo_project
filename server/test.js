@@ -1,6 +1,6 @@
 const naturalTextAnalyzer = require('./test_parallel_dots');
 
-const string = "Donald Trump is President of America.";
+const string = "soccer";
 
 naturalTextAnalyzer(string)
   .then( answer => {

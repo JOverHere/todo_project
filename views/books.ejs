@@ -68,7 +68,7 @@
       <h1>Books <i class="fas fa-book"></i></h1>
     </div>
     <div id="render-todo">
-
+      <form method="POST" action="/category/book/completed">
         <% for(item of items){ %>
           <li>
             <%= "Title: " + item.title %>
@@ -79,9 +79,9 @@
           <li>
             <%= "Date: " +  item.date_created %>
           </li>
-          <form method="POST" action="#">
-            <button>Completed</button>
-          </form>
+
+          <button id="completed" name="completed">Completed</button>
+      </form>
           </li>
           <% }; %>
 
