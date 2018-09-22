@@ -14,7 +14,7 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 const cookieSession = require('cookie-session');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcryptjs');
  
 
 
@@ -183,18 +183,18 @@ app.get("/category/product", (req, res) => {
 
 
 
-// Login for users
+// // Login for users
 app.post('/login', (req, res) => {
   knex.select('*').from('users').then(dbData => {
-  for (const user in dbData) {
-    if (req.body.email === users[user].email &&
-      bcrypt.compareSync(req.body.password, users[user].password)) {
+  for (const user of dbData) {
+    if (req.body.username === user.username && req.body.password === user.password) {
       req.session.user_id = user;
+      console.log(user);
       res.redirect('/urls');
     }
   }
   return res.status(403).send('Email or password is invalid.');
-});
+});})
 
 
 
@@ -227,5 +227,3 @@ app.post("/register", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
-
-
