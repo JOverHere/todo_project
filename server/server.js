@@ -95,7 +95,7 @@ app.get("/category/restaurant", (req, res) => {
     complete: false
   }).then(dbData => {
     const restaurant_items = [];
-    for(item of dbData) {
+    for(let item of dbData) {
       restaurant_items.push(item);
     }
     const templateVars = {
@@ -180,7 +180,8 @@ app.get("/category/movie", (req, res) => {
 //post action to set completed = true.
 app.post("/category/movie/completed", (req, res) => {
 
-  //console.log(req.body);
+  // console.log(req.body.id);
+  //res.redirect("/category/movie");
   knex('items').where({
     id: req.body.id
   }).update({complete:true}).then(item => {
