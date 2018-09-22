@@ -51,7 +51,6 @@ app.get("/", (req, res) => {
 app.post("/save_item", (req, res) => {
 
   let analyzeResult = "";
-  let date = new Date(req.body.date);
   naturalTextAnalyzer(req.body.title).then(answer => {
     analyzeResult += answer;
 
@@ -59,7 +58,7 @@ app.post("/save_item", (req, res) => {
       title: req.body.title,
       description: req.body.description,
       complete: false,
-      date_created: date,
+      date_created: req.body.date,
       category: analyzeResult,
       user_id: 5
     }).then(result => {
@@ -159,7 +158,7 @@ app.get("/category/product", (req, res) => {
       const templateVars = {
         items: product_items
       }
-        res.render("movies", templateVars);
+        res.render("products", templateVars);
     });
 })
 
@@ -167,7 +166,6 @@ app.get("/category/product", (req, res) => {
 // >>>>>>>>>>>>>>>>>>>>>>REGISTER PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // renders the register page.
 app.get("/register", (req, res) => {
-
   res.render("register");
 });
 
@@ -182,9 +180,6 @@ app.post("/register", (req, res) => {
     console.log("INSERTION WAS COMPLETE");
     res.redirect("/");
   });
-
-
-
 
 });
 
