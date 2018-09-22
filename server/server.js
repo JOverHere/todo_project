@@ -50,6 +50,24 @@ app.get("/", (req, res) => {
 //catches info from the create new items page and saves it into db.
 app.post("/save_item", (req, res) => {
 
+  let analyzeResult = "";
+  let date = new Date(req.body.date);
+  naturalTextAnalyzer(req.body.title).then(answer => {
+    analyzeResult += answer;
+
+    knex('items').insert({
+      title: req.body.title,
+      description: req.body.description,
+      complete: false,
+      date_created: date,
+      category: analyzeResult,
+      user_id: 5
+    }).then(result => {
+      console.log("INSERTION WAS COMPLETE" + analyzeResult);
+    });
+
+    res.redirect("/");
+  })
 
 
 });
@@ -118,6 +136,14 @@ app.get("/category/product", (req, res) => {
         res.render("movies", templateVars);
     });
 })
+
+
+// >>>>>>>>>>>>>>>>>>>>>>REGISTER PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// renders the register page.
+app.get("/register", (req, res) => {
+
+  res.render("register");
+});
 
 
 
