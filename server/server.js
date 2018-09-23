@@ -130,6 +130,17 @@ app.post("/category/restaurant/completed", (req, res) => {
   });
 });
 
+//changes the category of the selected item into the one the user selects.
+// app.post("/category/restaurant/change_category", (req, res) => {
+
+//   knex('items').where({
+//     id:req.body.id
+//   }).update({category:req.body.category}).then(item => {
+//     res.redirect("/category/restaurant")
+//   })
+
+// })
+
 
 // >>>>>>>>>>>>>>>>>>>>>BOOK PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
