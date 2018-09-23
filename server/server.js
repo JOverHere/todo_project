@@ -247,7 +247,7 @@ app.get('/category/product', (req, res) => {
 
 })
 
-//post action to set completed = true.
+// post action to set completed = true.
 app.post('/category/product/completed', (req, res) => {
 
   //console.log(req.body);
@@ -274,9 +274,7 @@ app.post('/login', (req, res) => {
     if (user === []) {
       return res.status(403).send('Email or password is invalid.');
     } else {
-      //console.log("DEBUG", user[0].id);
       req.session.user_id = user[0].id;
-      //console.log("DEBUG", req.session.user_id);
       res.redirect('/');
     }
 
@@ -284,11 +282,11 @@ app.post('/login', (req, res) => {
 
 });
 
-// // logs the user out and clears cookie-session
-// app.post('/logout', (req, res) => {
-//   req.session.user_id = null;
-//   res.redirect('/register');
-// })
+// logs the user out and clears cookie-session
+app.post('/logout', (req, res) => {
+  req.session.user_id = null;
+  res.redirect('/register'); 
+})
 
 
 
