@@ -93,8 +93,13 @@ app.post('/save_item', (req, res) => {
 
 // renders the restaurant page with all of the items with category restaurant
 // as well as complete = false.
+<<<<<<< HEAD
 app.get('/category/restaurant', (req, res) => {
   if (req.session.user_id) {
+=======
+app.get("/category/restaurant", (req, res) => {
+  if(req.session.user_id) {
+>>>>>>> frontend/css
     knex('items').where({
       category: 'restaurants',
       complete: false,
@@ -177,8 +182,13 @@ app.post('/category/book/completed', (req, res) => {
 // >>>>>>>>>>>>>>>>>>>>>MOVIE PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // renders the movie page with all of the items with category movie
 // as well as complete = false.
+<<<<<<< HEAD
 app.get('/category/movie', (req, res) => {
   if (req.session.user_id) {
+=======
+app.get("/category/movie", (req, res) => {
+  if(req.session.user_id) {
+>>>>>>> frontend/css
     knex('items').where({
       category: 'movies',
       complete: false,
@@ -204,8 +214,8 @@ app.get('/category/movie', (req, res) => {
 })
 
 //post action to set completed = true.
-app.post('/category/movie/completed', (req, res) => {
 
+app.post('/category/movie/completed', (req, res) => {
   // console.log(req.body.id);
   //res.redirect("/category/movie");
   knex('items').where({
@@ -285,7 +295,7 @@ app.post('/login', (req, res) => {
 // logs the user out and clears cookie-session
 app.post('/logout', (req, res) => {
   req.session.user_id = null;
-  res.redirect('/register'); 
+  res.redirect('/register');
 })
 
 
