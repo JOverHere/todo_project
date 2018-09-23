@@ -55,7 +55,12 @@ app.use('/api/users', usersRoutes(knex));
 // >>>>>>>>>>>>>>>>>>>>>HOMEPAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // renders the Home page
 app.get('/', (req, res) => {
-  res.render('index');
+  if(req.session.user_id) {
+    res.render('index');
+  } else {
+    res.redirect("/register");
+  }
+
 });
 
 //catches info from the create new items page and saves it into db.
@@ -72,7 +77,7 @@ app.post('/save_item', (req, res) => {
         complete: false,
         date_created: req.body.date,
         category: analyzeResult,
-        user_id: 22
+        user_id: req.session.user_id
       }).then(result => {
         window.alert('ITEM CREATED IN CATEGORY' + analyzeResult);
         // console.log("INSERTION WAS COMPLETE" + analyzeResult);
@@ -267,21 +272,39 @@ app.post('/category/product/completed', (req, res) => {
 
 // >>>>>>>>>>>>>>>>>>>>>>LOGIN/LOGOUT PAGE POST FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+// app.post('/login', (req, res) => {
+//   //console.log(req.body.username, req.body.password);
+//   knex('users').where({
+//     username: req.body.username,
+//     password: req.body.password
+//   }).then(user => {
+//     console.log(typeof user);
+//     if (user === ) {
+//       return res.status(403).send('Email or password is invalid.');
+//     } else {
+//       req.session.user_id = user[0].id;
+//       res.redirect('/');
+//     }
+
+//   })
+
+// });
+
 app.post('/login', (req, res) => {
-  //console.log(req.body.username, req.body.password);
-  knex('users').where({
-    username: req.body.username,
-    password: req.body.password
-  }).then(user => {
-    if (user === []) {
-      return res.status(403).send('Email or password is invalid.');
-    } else {
-      req.session.user_id = user[0].id;
-      res.redirect('/');
+  const username = req.body.username;
+  const password = req.body.password;
+  knex('users').select()
+  .then(users => {
+    for(let user of users) {
+      console.log(user.username, user.password);
+      // if(user.username === username && user.password === password) {
+      //   req.session.user_id = user.id;
+      //   res.redirect('/');
+      // } else {
+      //   return res.status(403).send('Email or password is invalid.');
+      // }
     }
-
   })
-
 });
 
 // logs the user out and clears cookie-session
@@ -308,7 +331,7 @@ app.post('/register', (req, res) => {
     password: req.body.password
   }).then(result => {
     console.log('INSERTION WAS COMPLETE');
-    res.redirect('/');
+    res.redirect('/register');
   });
 
 });
