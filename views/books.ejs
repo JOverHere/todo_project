@@ -93,8 +93,9 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Move</a>
               </div>
-
-              <form>
+            </div>
+          </form>
+          <form method="POST" action="/category/change_category">
                 <select name="category">
                   <option value="movies">movies</option>
                   <option value="restaurants">restaurants</option>
@@ -102,12 +103,8 @@
                   <option value="products">products</option>
                 </select>
                 <br><br>
-                <input type="submit">
+                <input name="id" value="<%= item.id %>" type="submit">
               </form>
-
-
-            </div>
-          </form>
           </li>
         </div>
         <br />
