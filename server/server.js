@@ -82,7 +82,7 @@ app.get("/category/restaurant", (req, res) => {
     complete: false
   }).then(dbData => {
     const restaurant_items = [];
-    for(item of dbData) {
+    for(let item of dbData) {
       restaurant_items.push(item);
     }
     const templateVars = {
@@ -150,7 +150,7 @@ app.get("/category/movie", (req, res) => {
     for(let item of dbData) {
       movie_items.push(item);
     }
-    console.log("movie items is: ", movie_items);
+    //console.log("movie items is: ", movie_items);
 
     const templateVars = {
       items: movie_items
@@ -162,7 +162,7 @@ app.get("/category/movie", (req, res) => {
 //post action to set completed = true.
 app.post("/category/movie/completed", (req, res) => {
 
-  //console.log(req.body);
+  console.log(req.body);
   knex('items').where({
     id: req.body.id
   }).update({complete:true}).then(item => {
