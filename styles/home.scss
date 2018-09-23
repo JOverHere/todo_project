@@ -14,6 +14,7 @@ body {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 1;
   }
@@ -116,9 +117,9 @@ input:focus {
 }
 
 #navbar-box {
-   -webkit-box-shadow: 0 6px 6px -6px #999;
-    -moz-box-shadow: 0 6px 6px -6px #999;
-    box-shadow: 0 6px 6px -6px #999;
+  -webkit-box-shadow: 0 6px 6px -6px #999;
+  -moz-box-shadow: 0 6px 6px -6px #999;
+  box-shadow: 0 6px 6px -6px #999;
 }
 
 /*SIDE BAR CSS BELOW:*/
@@ -127,14 +128,14 @@ input:focus {
 
 
 #sidebar-wrapper {
- position: absolute;
+  position: absolute;
   left: 0;
   top: 94px;
   width: 250px;
   background: linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
-  linear-gradient(225deg, black 25%, transparent 25%) -50px 0,
-  linear-gradient(315deg, black 25%, transparent 25%),
-  linear-gradient(45deg, black 25%, transparent 25%);
+    linear-gradient(225deg, black 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, black 25%, transparent 25%),
+    linear-gradient(45deg, black 25%, transparent 25%);
   background-size: 2em 2em;
   background-color: #232323;
   height: calc(100vh - 92px);
@@ -193,7 +194,7 @@ p {
   top: 10px;
 }
 
-#sidebar-register{
+#sidebar-register {
   background: #fff;
   height: 80px;
   line-height: 70px;
@@ -202,7 +203,7 @@ p {
   font-size: 26px;
 }
 
-.sidebar-nav a:hover{
+.sidebar-nav a:hover {
   color: green;
 }
 
@@ -219,9 +220,9 @@ p {
   padding-top: 2%;
 }
 
-.form-controls{
-display: block;
-max-width: 50%;
+.form-controls {
+  display: block;
+  max-width: 50%;
 }
 
 .testest {
@@ -231,5 +232,3 @@ max-width: 50%;
   padding-bottom: 2%;
   font-size: 26px;
 }
-
-
