@@ -87,7 +87,8 @@
           </li>
           <form method="POST" action="/category/book/completed" >
              <button class="btn btn-success"  name ="id" value= "<%=item.id %>" id="<%=item.id%>">Completed</button>
-             <form method="POST" action="#">
+          </form>
+          <form method="POST" action="/category/change_category">
                 <label>Move ToDo :</label>
                 <select name="category" id="select">
                   <option value="movies">movies</option>
@@ -97,8 +98,6 @@
                 </select>
                 <button class="drpdown-submit" name="id" value="<%=item.id%>" type="submit"> Submit </button>
               </form>
-          </form>
-
           </li>
         </div>
          <br />

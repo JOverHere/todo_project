@@ -92,7 +92,8 @@
                   <a class="dropdown-item" href="#">Move</a>
                 </div>
               </div> -->
-           <form method="POST" action="/category/change_category">
+          </form>
+          <form method="POST" action="/category/change_category">
                 <label>Move ToDo :</label>
                 <select name="category" id="select">
                   <option value="movies">movies</option>
@@ -102,7 +103,6 @@
                 </select>
                 <button class="drpdown-submit" name="id" value="<%=item.id%>" type="submit"> Submit </button>
               </form>
-          </form>
       </div>
         <br />
         <% }; %>
