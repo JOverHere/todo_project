@@ -243,8 +243,6 @@ app.get('/category/product', (req, res) => {
       console.log('product items is: ', product_items);
       const templateVars = {
         items: product_items,
-
-        // user: user.username
       }
       res.render('products', templateVars);
     });
@@ -272,44 +270,46 @@ app.post('/category/product/completed', (req, res) => {
 
 // >>>>>>>>>>>>>>>>>>>>>>LOGIN/LOGOUT PAGE POST FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// app.post('/login', (req, res) => {
-//   //console.log(req.body.username, req.body.password);
-//   knex('users').where({
-//     username: req.body.username,
-//     password: req.body.password
-//   }).then(user => {
-//     console.log(typeof user);
-//     if (user === ) {
-//       return res.status(403).send('Email or password is invalid.');
-//     } else {
-//       req.session.user_id = user[0].id;
-//       res.redirect('/');
-//     }
-
-//   })
-
-// });
-
 app.post('/login', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  knex('users').select()
-  .then(users => {
-    for(let user of users) {
-      console.log(user.username, user.password);
-      // if(user.username === username && user.password === password) {
-      //   req.session.user_id = user.id;
-      //   res.redirect('/');
-      // } else {
-      //   return res.status(403).send('Email or password is invalid.');
-      // }
+  //console.log(req.body.username, req.body.password);
+  knex('users').where({
+    username: req.body.username,
+    password: req.body.password
+  }).then(user => {
+    console.log(typeof user);
+    if (user[0] === undefined || req.body.username !== user[0].username || req.body.password !== user[0].password) {
+      return res.status(403).send('Email or password is invalid.');
+    } else {
+      req.session.user_id = user[0].id;
+      res.redirect('/');
     }
+
   })
+
 });
+
+// app.post('/login', (req, res) => {
+//   const username = req.body.username;
+//   const password = req.body.password;
+//   knex('users').where({
+//     username: username,
+//     password: password
+//   }).select()
+//   .then(users => {
+//     let authentication = false;
+//     //console.log(user.username, user.password);
+//     if(users[0].username === username && users[0].password === password) {
+//       req.session.user_id = users[0].id;
+//       res.redirect('/');
+//     } else {
+//       return res.status(403).send('Email or password is invalid.');
+//     }
+//   })
+// });
 
 // logs the user out and clears cookie-session
 app.post('/logout', (req, res) => {
-  req.session.user_id = null;
+  req.session = null;
   res.redirect('/register');
 })
 
