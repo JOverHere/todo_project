@@ -15,8 +15,11 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 const cookieSession = require('cookie-session');
 // const bcrypt = require('bcryptjs');
- 
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2', 'key3'],
+}));
 
 const naturalTextAnalyzer = require('./test_parallel_dots');
 
@@ -32,10 +35,7 @@ app.use(morgan('dev'));
 
 // log cookie session to users after they sign in
 
-app.use(cookieSession({
-  user_id: 'session',
-  keys: ['key1'],
-}));
+
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
@@ -63,24 +63,30 @@ app.get("/", (req, res) => {
 //catches info from the create new items page and saves it into db.
 app.post("/save_item", (req, res) => {
 
-  let analyzeResult = "";
-  naturalTextAnalyzer(req.body.title).then(answer => {
-    analyzeResult += answer;
+  if(req.session.user_id) {
+    let analyzeResult = "";
+    naturalTextAnalyzer(req.body.title).then(answer => {
+      analyzeResult += answer;
 
-    knex('items').insert({
-      title: req.body.title,
-      description: req.body.description,
-      complete: false,
-      date_created: req.body.date,
-      category: analyzeResult,
-      user_id: 22
-    }).then(result => {
-      window.alert("ITEM CREATED IN CATEGORY" + analyzeResult);
-      // console.log("INSERTION WAS COMPLETE" + analyzeResult);
-    });
+      knex('items').insert({
+        title: req.body.title,
+        description: req.body.description,
+        complete: false,
+        date_created: req.body.date,
+        category: analyzeResult,
+        user_id: 22
+      }).then(result => {
+        window.alert("ITEM CREATED IN CATEGORY" + analyzeResult);
+        // console.log("INSERTION WAS COMPLETE" + analyzeResult);
+      });
 
-    res.redirect("/");
-  })
+      res.redirect("/");
+    })
+  } else {
+    //alert("You have not logged in yet. Redirecting to register page.");
+    res.redirect("/register");
+  }
+
 
 
 });
@@ -90,27 +96,32 @@ app.post("/save_item", (req, res) => {
 // renders the restaurant page with all of the items with category restaurant
 // as well as complete = false.
 app.get("/category/restaurant", (req, res) => {
-  knex('items').where({
-    category: 'restaurants',
-    complete: false
-  }).then(dbData => {
-    const restaurant_items = [];
-    for(let item of dbData) {
-      restaurant_items.push(item);
-    }
-    const templateVars = {
-      items: restaurant_items,
-      // users: user.username
-    }
-    // console.log(user.username)
-    res.render("restaurants", templateVars);
-  });
+  if(req.session.user_id) {
+    knex('items').where({
+      category: 'restaurants',
+      complete: false,
+      user_id: req.session.user_id
+    }).then(dbData => {
+      const restaurant_items = [];
+      for(let item of dbData) {
+        restaurant_items.push(item);
+      }
+      const templateVars = {
+        items: restaurant_items,
+        // users: user.username
+      }
+      // console.log(user.username)
+      res.render("restaurants", templateVars);
+    });
+  } else {
+    res.redirect("/register");
+  }
+
 });
 
 //post action to set completed = true.
 app.post("/category/restaurant/completed", (req, res) => {
 
-  //console.log(req.body);
   knex('items').where({
     id: req.body.id
   }).update({complete:true}).then(item => {
@@ -125,20 +136,27 @@ app.post("/category/restaurant/completed", (req, res) => {
 // renders the book page with all of the items with category book
 // as well as complete = false.
 app.get("/category/book", (req, res) => {
-  knex('items').where({
-    category: 'books',
-    complete: false
-  }).then(dbData => {
-    const book_items = [];
-    for(let item of dbData) {
-      book_items.push(item);
-    }
-    const templateVars = {
-      items: book_items,
-      // users: user.username
-    }
-      res.render("books", templateVars);
-  });
+  console.log(req.session.user_id);
+  if(req.session.user_id) {
+    knex('items').where({
+      category: 'books',
+      complete: false,
+      user_id: req.session.user_id
+    }).then(dbData => {
+      const book_items = [];
+      for(let item of dbData) {
+        book_items.push(item);
+      }
+      const templateVars = {
+        items: book_items,
+        // users: user.username
+      }
+        res.render("books", templateVars);
+    });
+  } else {
+    res.redirect("/register");
+  }
+
 });
 
 //post action to set completed = true.
@@ -158,23 +176,29 @@ app.post("/category/book/completed", (req, res) => {
 // renders the movie page with all of the items with category movie
 // as well as complete = false.
 app.get("/category/movie", (req, res) => {
-  knex('items').where({
-    category: 'movies',
-    complete: false
-  }).then(dbData => {
-    const movie_items = [];
-    for(let item of dbData) {
-      movie_items.push(item);
-    }
-    console.log("movie items is: ", movie_items);
+  if(req.session.user_id) {
+    knex('items').where({
+      category: 'movies',
+      complete: false,
+      user_id: req.session.user_id
+    }).then(dbData => {
+      const movie_items = [];
+      for(let item of dbData) {
+        movie_items.push(item);
+      }
+      console.log("movie items is: ", movie_items);
 
-    const templateVars = {
-      items: movie_items,
-      // users: user.username
-  
-    };
-      res.render("movies", templateVars);
-  });
+      const templateVars = {
+        items: movie_items,
+        // users: user.username
+
+      };
+        res.render("movies", templateVars);
+    });
+  } else {
+    res.redirect("/register");
+  }
+
 })
 
 //post action to set completed = true.
@@ -195,11 +219,12 @@ app.post("/category/movie/completed", (req, res) => {
 // renders the product page with all of the items with category product
 // as well as complete = false.
 app.get("/category/product", (req, res) => {
-
-  knex('items').where({
-    category: 'products',
-    complete: false
-  }).then(dbData => {
+  if(req.session.user_id) {
+    knex('items').where({
+      category: 'products',
+      complete: false,
+      user_id: req.session.user_id
+    }).then(dbData => {
       const product_items = [];
       for(let item of dbData) {
         product_items.push(item);
@@ -212,6 +237,10 @@ app.get("/category/product", (req, res) => {
       }
         res.render("products", templateVars);
     });
+  } else {
+    res.redirect("/register");
+  }
+
 })
 
 //post action to set completed = true.
@@ -228,10 +257,10 @@ app.post("/category/product/completed", (req, res) => {
 
 
 
-// >>>>>>>>>>>>>>>>>>>>>>LOGIN PAGE POST FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// >>>>>>>>>>>>>>>>>>>>>>LOGIN/LOGOUT PAGE POST FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 app.post('/login', (req, res) => {
-  console.log(req.body.username);
+  //console.log(req.body.username, req.body.password);
   knex('users').where({
     username: req.body.username,
     password: req.body.password
@@ -240,25 +269,21 @@ app.post('/login', (req, res) => {
       return res.status(403).send('Email or password is invalid.');
     }
     else {
-      req.session.user_id = user.id;
-      console.log("DEBUGGG");
+      //console.log("DEBUG", user[0].id);
+      req.session.user_id = user[0].id;
+      //console.log("DEBUG", req.session.user_id);
+      res.redirect("/");
     }
-    //console.log(req.session.user_id);
-    
+
   })
 
-  // knex('users').where('username').then(dbData => {
-  // for (const user of dbData) {
-  //   if (req.body.username === user.username && req.body.password === user.password) {
-  //     req.session.user_id = user;
-  //     console.log(user);
-  //     res.redirect('/urls');
-  //   }
-  //   console.log(req.session.user_id);
-  // }
-  
 });
 
+//logs the user out and clears cookie-session
+app.post('/logout', (req, res) => {
+  req.session.user_id = null;
+  res.redirect('/register');
+})
 
 
 
