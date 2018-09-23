@@ -130,16 +130,7 @@ app.post('/category/restaurant/completed', (req, res) => {
   });
 });
 
-//changes the category of the selected item into the one the user selects.
-app.post("/category/change_category", (req, res) => {
-  console.log(req.body);
-  // knex('items').where({
-  //   id:req.body.id
-  // }).update({category:req.body.category}).then(item => {
-  //   res.redirect("/category/restaurant")
-  // })
 
-})
 
 
 // >>>>>>>>>>>>>>>>>>>>>BOOK PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -322,6 +313,19 @@ app.post('/register', (req, res) => {
 
 });
 
+
+//changes the category of the selected item into the one the user selects.
+app.post("/category/change_category", (req, res) => {
+  //console.log(req.body);
+  knex('items').where({
+    id:req.body.id
+  }).update({category:req.body.category}).then(item => {
+    let changed_category = req.body.category;
+    changed_category = changed_category.substring(0,changed_category.length-1);
+    res.redirect("/category/" + changed_category);
+  })
+
+})
 
 app.listen(PORT, () => {
   console.log('Example app listening on port ' + PORT);
