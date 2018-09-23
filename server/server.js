@@ -96,21 +96,6 @@ app.post("/save_item", (req, res) => {
 // renders the restaurant page with all of the items with category restaurant
 // as well as complete = false.
 app.get("/category/restaurant", (req, res) => {
-<<<<<<< HEAD
-  knex('items').where({
-    category: 'restaurants',
-    complete: false
-  }).then(dbData => {
-    const restaurant_items = [];
-    for(let item of dbData) {
-      restaurant_items.push(item);
-    }
-    const templateVars = {
-      items: restaurant_items
-    }
-    res.render("restaurants", templateVars);
-  });
-
   if(req.session.user_id) {
     knex('items').where({
       category: 'restaurants',
@@ -131,7 +116,6 @@ app.get("/category/restaurant", (req, res) => {
   } else {
     res.redirect("/register");
   }
-
 
 });
 
@@ -192,17 +176,6 @@ app.post("/category/book/completed", (req, res) => {
 // renders the movie page with all of the items with category movie
 // as well as complete = false.
 app.get("/category/movie", (req, res) => {
-
-  knex('items').where({
-    category: 'movies',
-    complete: false
-  }).then(dbData => {
-    const movie_items = [];
-    for(let item of dbData) {
-      movie_items.push(item);
-    }
-    //console.log("movie items is: ", movie_items);
-
   if(req.session.user_id) {
     knex('items').where({
       category: 'movies',
@@ -226,18 +199,13 @@ app.get("/category/movie", (req, res) => {
     res.redirect("/register");
   }
 
-
 })
 
 //post action to set completed = true.
 app.post("/category/movie/completed", (req, res) => {
 
-
-  console.log(req.body);
-
   // console.log(req.body.id);
   //res.redirect("/category/movie");
-
   knex('items').where({
     id: req.body.id
   }).update({complete:true}).then(item => {
