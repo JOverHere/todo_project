@@ -20,7 +20,7 @@
   <!-- navbar -->
   <nav id="navbar-box" class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i>  Git 'Er Done</a>
-    <form method="POST" action="/login">
+    <!-- <form method="POST" action="/login">
       <div class="form-row">
         <div class="col">
           <label>
@@ -33,11 +33,13 @@
             Password:
           </label>
           <input type="password" class="form-control" name="password" placeholder="Password">
-        </div>
-         <button type="submit" name="login" class="btn btn-warning">LOG IN</button>
-        <button type="submit" name="logout" class="btn btn-info">LOG OUT</button>
-      </div>
-    </form>
+        </div> -->
+      <!--    <button type="submit" name="login" class="btn btn-warning">LOG IN</button> -->
+        <form method="POST" action="/logout">
+        <button type="submit" name="logout" class="btn btn-dark">LOG OUT</button>
+      </form>
+     <!--  </div>
+    </form> -->
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -78,37 +80,34 @@
           <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-<<<<<<< HEAD
-          <form method="POST" action="/category/movie/completed" name ="id" value=<%=item.id%> id=<%=item.id%>>
-            <button class="btn btn-success">Completed</button>
-<div class="btn-group">
-  <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    More..
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Move</a>
-  </div>
-</div>
-
           <form method="POST" action="/category/movie/completed" >
               <button class="btn btn-success" name="id" value="<%=item.id%>" id="<%=item.id%>">
                 Completed
               </button>
-              <div class="btn-group">
+             <!--  <div class="btn-group">
                 <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   More..
                 </button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">Move</a>
                 </div>
-              </div>
-
-          </form>
-          </li>
-        </div>
+              </div> -->
+          <form>
+                <label>Move ToDo :</label>
+                <select name="category" id="select">
+                  <option value="movies">movies</option>
+                  <option value="restaurants">restaurants</option>
+                  <option value="books">books</option>
+                  <option value="products">products</option>
+                </select>
+                <button class="drpdown-submit" type="submit"> Submit </button>
+              </form>
+      </div>
         <br />
         <% }; %>
     </div>
+
+
   </main>
 </body>
 
