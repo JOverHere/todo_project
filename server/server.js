@@ -93,13 +93,9 @@ app.post('/save_item', (req, res) => {
 
 // renders the restaurant page with all of the items with category restaurant
 // as well as complete = false.
-<<<<<<< HEAD
+
 app.get('/category/restaurant', (req, res) => {
   if (req.session.user_id) {
-=======
-app.get("/category/restaurant", (req, res) => {
-  if(req.session.user_id) {
->>>>>>> frontend/css
     knex('items').where({
       category: 'restaurants',
       complete: false,
@@ -182,13 +178,9 @@ app.post('/category/book/completed', (req, res) => {
 // >>>>>>>>>>>>>>>>>>>>>MOVIE PAGE POST/GET FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // renders the movie page with all of the items with category movie
 // as well as complete = false.
-<<<<<<< HEAD
+
 app.get('/category/movie', (req, res) => {
   if (req.session.user_id) {
-=======
-app.get("/category/movie", (req, res) => {
-  if(req.session.user_id) {
->>>>>>> frontend/css
     knex('items').where({
       category: 'movies',
       complete: false,

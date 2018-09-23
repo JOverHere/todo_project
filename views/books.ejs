@@ -87,14 +87,16 @@
           </li>
           <form method="POST" action="/category/book/completed" >
              <button class="btn btn-success"  name ="id" value= "<%=item.id %>" id="<%=item.id%>">Completed</button>
-             <div class="btn-group">
-  <button type="submit" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    More..
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Move</a>
-  </div>
-</div>
+             <form method="POST" action="#">
+                <label>Move ToDo :</label>
+                <select name="category" id="select">
+                  <option value="movies">movies</option>
+                  <option value="restaurants">restaurants</option>
+                  <option value="books">books</option>
+                  <option value="products">products</option>
+                </select>
+                <button class="drpdown-submit" name="id" value="<%=item.id%>" type="submit"> Submit </button>
+              </form>
           </form>
 
           </li>
