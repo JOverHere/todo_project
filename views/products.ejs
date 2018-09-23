@@ -21,7 +21,7 @@
   <!-- navbar -->
   <nav id="navbar-box" class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i>  Git 'Er Done</a>
-    <form>
+    <form method="POST" action="/login">
       <div class="form-row">
         <div class="col">
           <label>
@@ -82,8 +82,10 @@
           <li id="bottom-border-radius">
             <%= "Date: " + item.date_created  %>
           </li>
-          <form method="POST" action="/category/movie" name ="id" value=<%=item.id%> id=<%=item.id%>>
-             <button class="btn btn-success">Completed</button>
+          <form method="POST" action="/category/product/completed">
+            <button class="btn btn-success" name ="id" value="<%=item.id%>" id="<%=item.id%>">
+              Completed
+            </button>
 
 
           </form>
