@@ -3,7 +3,8 @@
 
 <head>
   <title>Register</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -19,7 +20,7 @@
 <body>
   <!-- navbar -->
   <nav id="navbar-box" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i>  Git 'Er Done</a>
+    <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i> Git 'Er Done</a>
     <form method="POST" action="/login">
       <div class="form-row">
         <div class="col">
@@ -37,31 +38,32 @@
         <button type="submit" class="btn btn-warning">LOG IN</button>
       </div>
     </form>
-     <form method="POST" action="/logout">
-        <button type="submit" name="logout" class="btn btn-dark">LOG OUT</button>
-      </form>
+    <form method="POST" action="/logout">
+      <button type="submit" name="logout" class="btn btn-dark">LOG OUT</button>
+    </form>
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> -->
   </nav>
   </button>
   <div class="testest">
-  <form id="register-form" class="text-center" method="POST" action="/register">
-    <div class="form-group">
-      <label class="register-text">Username</label>
-      <input type="username" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
-      <medium id="emailHelp" class="form-text text-muted">Make it unique!</medium>
-    </div>
-    <div class="form-group">
-      <label class="register-text">Password</label>
-      <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
-    </div>
-    <div>
+    <form id="register-form" class="text-center" method="POST" action="/register">
+      <div class="form-group">
+        <label class="register-text">Username</label>
+        <input type="username" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter username">
+        <medium id="emailHelp" class="form-text text-muted">Make it unique!</medium>
+      </div>
+      <div class="form-group">
+        <label class="register-text">Password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+      </div>
+      <div>
 
-    <button id="buttonreg" type="submit" class="btn btn-secondary btn-lg btn-block">Come on in!</button>
+        <button id="buttonreg" type="submit" class="btn btn-secondary btn-lg btn-block">Come on in!</button>
 
-  </form>
-  </main>
+    </form>
+    </main>
 </body>
 
 </html>

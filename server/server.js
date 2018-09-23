@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
 
 });
 
-//catches info from the create new items page and saves it into db.
+// catches info from the create new items page and saves it into db.
 app.post('/save_item', (req, res) => {
 
   if (req.session.user_id) {
@@ -80,7 +80,6 @@ app.post('/save_item', (req, res) => {
         user_id: req.session.user_id
       }).then(result => {
         window.alert('ITEM CREATED IN CATEGORY' + analyzeResult);
-        // console.log("INSERTION WAS COMPLETE" + analyzeResult);
       });
 
       res.redirect('/');
@@ -111,9 +110,7 @@ app.get('/category/restaurant', (req, res) => {
       }
       const templateVars = {
         items: restaurant_items,
-        // users: user.username
       }
-      // console.log(user.username)
       res.render('restaurants', templateVars);
     });
   } else {
@@ -122,7 +119,7 @@ app.get('/category/restaurant', (req, res) => {
 
 });
 
-//post action to set completed = true.
+// post action to set completed = true.
 app.post('/category/restaurant/completed', (req, res) => {
 
   knex('items').where({
@@ -156,7 +153,6 @@ app.get('/category/book', (req, res) => {
       }
       const templateVars = {
         items: book_items,
-        // users: user.username
       }
       res.render('books', templateVars);
     });
@@ -166,10 +162,9 @@ app.get('/category/book', (req, res) => {
 
 });
 
-//post action to set completed = true.
-app.post('/category/book/completed', (req, res) => {
+// post action to set completed = true.
 
-  //console.log(req.body);
+app.post('/category/book/completed', (req, res) => {
   knex('items').where({
     id: req.body.id
   }).update({
@@ -199,7 +194,6 @@ app.get('/category/movie', (req, res) => {
 
       const templateVars = {
         items: movie_items,
-        // users: user.username
 
       };
       res.render('movies', templateVars);
@@ -210,11 +204,9 @@ app.get('/category/movie', (req, res) => {
 
 })
 
-//post action to set completed = true.
+// post action to set completed = true.
 
 app.post('/category/movie/completed', (req, res) => {
-  // console.log(req.body.id);
-  //res.redirect("/category/movie");
   knex('items').where({
     id: req.body.id
   }).update({
@@ -244,7 +236,6 @@ app.get('/category/product', (req, res) => {
       const templateVars = {
         items: product_items,
 
-        // user: user.username
       }
       res.render('products', templateVars);
     });
@@ -255,6 +246,7 @@ app.get('/category/product', (req, res) => {
 })
 
 // post action to set completed = true.
+
 app.post('/category/product/completed', (req, res) => {
 
   //console.log(req.body);
@@ -272,44 +264,20 @@ app.post('/category/product/completed', (req, res) => {
 
 // >>>>>>>>>>>>>>>>>>>>>>LOGIN/LOGOUT PAGE POST FUNCTIONS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// app.post('/login', (req, res) => {
-//   //console.log(req.body.username, req.body.password);
-//   knex('users').where({
-//     username: req.body.username,
-//     password: req.body.password
-//   }).then(user => {
-//     console.log(typeof user);
-//     if (user === ) {
-//       return res.status(403).send('Email or password is invalid.');
-//     } else {
-//       req.session.user_id = user[0].id;
-//       res.redirect('/');
-//     }
-
-//   })
-
-// });
-
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   knex('users').select()
   .then(users => {
     for(let user of users) {
-      console.log(user.username, user.password);
-      // if(user.username === username && user.password === password) {
-      //   req.session.user_id = user.id;
-      //   res.redirect('/');
-      // } else {
-      //   return res.status(403).send('Email or password is invalid.');
-      // }
+  
     }
   })
 });
 
 // logs the user out and clears cookie-session
 app.post('/logout', (req, res) => {
-  req.session.user_id = null;
+  req.session = null;
   res.redirect('/register');
 })
 
@@ -322,10 +290,8 @@ app.get('/register', (req, res) => {
 });
 
 
-//creates user and inserts into database.
+// creates user and inserts into database.
 app.post('/register', (req, res) => {
-
-  // console.log(req.body.username);
   knex('users').insert({
     username: req.body.username,
     password: req.body.password
@@ -337,9 +303,8 @@ app.post('/register', (req, res) => {
 });
 
 
-//changes the category of the selected item into the one the user selects.
+// changes the category of the selected item into the one the user selects.
 app.post("/category/change_category", (req, res) => {
-  //console.log(req.body);
   knex('items').where({
     id:req.body.id
   }).update({category:req.body.category}).then(item => {

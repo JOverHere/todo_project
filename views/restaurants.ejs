@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="../vendor/border-box.css" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="./scripts/app.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="../styles/home.css">
   <link rel="stylesheet" type="text/css" href="../styles/categories.css">
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
@@ -18,12 +19,13 @@
 <body>
   <!-- navbar -->
   <nav id="navbar-box" class="navbar navbar-custom navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i>  Git 'Er Done</a>
-         <form method="POST" action="/logout">
-        <button type="submit" name="logout" class="btn btn-dark">LOGOUT</button>
-      </form>
+    <a class="navbar-brand" href="/"><i class="fas fa-check-circle"></i> Git 'Er Done</a>
+    <form method="POST" action="/logout">
+      <button type="submit" name="logout" class="btn btn-dark">LOGOUT</button>
+    </form>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Sidebar -->
@@ -55,41 +57,41 @@
     </div>
     <div id="render-todo">
       <% for(item of items){ %>
-        <div id="item-border">
-          <li id="top-border-radius">
-            <%= "Title: " + item.title  %>
-          </li>
-          <li>
-            <%= "Description: " + item.description %>
-          </li>
-          <li id="bottom-border-radius">
-            <%= "Date: " + item.date_created  %>
-          </li>
-          <form method="POST" action="/category/restaurant/completed">
-              <button class="btn btn-success"  name="id" value="<%=item.id%>" id="<%=item.id%>">
-                Completed
-              </button>
-          </form>
-          <form method="POST" action="/category/change_category">
-                <label>Move ToDo :</label>
-                <select name="category" id="select">
-                  <option value="movies">movies</option>
-                  <option value="restaurants">restaurants</option>
-                  <option value="books">books</option>
-                  <option value="products">products</option>
-                </select>
-                <button class="drpdown-submit" name="id" value="<%=item.id%>" type="submit"> Submit </button>
-              </form>
+      <div id="item-border">
+        <li id="top-border-radius">
+          <%= "Title: " + item.title  %>
+        </li>
+        <li>
+          <%= "Description: " + item.description %>
+        </li>
+        <li id="bottom-border-radius">
+          <%= "Date: " + item.date_created  %>
+        </li>
+        <form method="POST" action="/category/restaurant/completed">
+          <button class="btn btn-success" name="id" value="<%=item.id%>" id="<%=item.id%>">
+            Completed
+          </button>
+        </form>
+        <form method="POST" action="/category/change_category">
+          <label>Move ToDo :</label>
+          <select name="category" id="select">
+            <option value="movies">movies</option>
+            <option value="restaurants">restaurants</option>
+            <option value="books">books</option>
+            <option value="products">products</option>
+          </select>
+          <button class="drpdown-submit" name="id" value="<%=item.id%>" type="submit"> Submit </button>
+        </form>
 
 
-          </li>
-        </div>
-        <br />
-        <% }; %>
+        </li>
+      </div>
+      <br />
+      <% }; %>
     </div>
     </div>
 
-<!--     <script>
+    <!--     <script>
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
